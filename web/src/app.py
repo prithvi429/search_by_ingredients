@@ -52,6 +52,13 @@ def init_opensearch():
         logger.error("OpenSearch connection failed")
         sys.exit(1)
 
+    # Ensure the 'ingredients' index exists before searching it
+    if not client.indices.exists(index="ingredients"):
+        client.indices.create(index="ingredients")
+        print("Created 'ingredients' index.")
+    else:
+        print("'ingredients' index already exists.")
+
     try:
         # Load all ingredients once OpenSearch is ready
         response = client.search(index="ingredients", body={
@@ -138,4 +145,4 @@ def search_by_ingredients():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True,host='0.0.0.0', port=8080)

@@ -1,0 +1,16 @@
+from opensearchpy import OpenSearch
+
+client = OpenSearch(
+    hosts=["http://localhost:9200"],
+    http_auth=None,
+    use_ssl=False,
+    verify_certs=False,
+    ssl_show_warn=False,
+)
+
+# Create the 'recipes' index if it doesn't exist
+if not client.indices.exists(index="recipes"):
+    client.indices.create(index="recipes")
+    print("Created 'recipes' index.")
+else:
+    print("'recipes' index already exists.")

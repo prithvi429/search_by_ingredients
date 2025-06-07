@@ -179,3 +179,5 @@ web/data/*.ipynb
 tmp.py
 internal/*
 .indexed
+
+ass_env
